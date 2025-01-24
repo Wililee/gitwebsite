@@ -7,7 +7,7 @@
     <title>Song List</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Comic Sans MS', sans-serif; /* Use Comic Sans */
             margin: 0;
             padding: 0;
             background-color: #f1e6ff; /* Soft purple background */
@@ -15,6 +15,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            text-align: center; /* Center align text */
         }
         table {
             border-collapse: collapse;
@@ -23,6 +24,7 @@
             background-color: white;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             border-radius: 8px; /* Rounded corners for the table */
+            margin-top: 20px;
         }
         th, td {
             padding: 15px;
@@ -45,9 +47,10 @@
             text-decoration: underline;
         }
         h1 {
-            font-size: 2em;
+            font-size: 2.5em;
             color: #6c4fa0; /* Darker purple for the title */
             margin-bottom: 20px;
+            text-align: center; /* Center align the title */
         }
     </style>
 </head>
@@ -65,7 +68,7 @@
         <tbody>
             <!-- New song rows will be inserted here -->
             <tr>
-                <td>24.01.23</td>
+                <td>25.01.23</td>
                 <td><a class="fresh" href="songs/HOFAH.mp3">HOFAH</a></td>
             </tr>
             <!-- More rows will be dynamically added by the script -->
