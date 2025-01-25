@@ -7,15 +7,17 @@
     <title>Song List</title>
     <style>
         body {
-            font-family: 'Comic Sans MS', sans-serif; /* Use Comic Sans */
+            font-family: 'Comic Sans MS', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f1e6ff; /* Soft purple background */
+            background-color: #f1e6ff;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
-            text-align: center; /* Center align text */
+            text-align: center;
+            overflow: hidden; /* Prevent scrollbars */
         }
         table {
             border-collapse: collapse;
@@ -23,7 +25,7 @@
             max-width: 800px;
             background-color: white;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            border-radius: 8px; /* Rounded corners for the table */
+            border-radius: 8px;
             margin-top: 20px;
         }
         th, td {
@@ -32,15 +34,15 @@
             border-bottom: 1px solid #ddd;
         }
         th {
-            background-color: #9b6cd3; /* Lighter purple for the header */
+            background-color: #9b6cd3;
             color: white;
             font-size: 1.1em;
         }
         tr:hover {
-            background-color: #f3e8ff; /* Light purple hover effect for rows */
+            background-color: #f3e8ff;
         }
         a {
-            color: #9b6cd3; /* Matching purple color for links */
+            color: #9b6cd3;
             text-decoration: none;
         }
         a:hover {
@@ -48,9 +50,16 @@
         }
         h1 {
             font-size: 2.5em;
-            color: #6c4fa0; /* Darker purple for the title */
+            color: #6c4fa0;
             margin-bottom: 20px;
-            text-align: center; /* Center align the title */
+        }
+        #hamster {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-image: url('https://placekitten.com/50/50'); /* Placeholder for hamster image */
+            background-size: cover;
+            background-position: center;
         }
     </style>
 </head>
@@ -66,14 +75,43 @@
             </tr>
         </thead>
         <tbody>
-            <!-- New song rows will be inserted here -->
             <tr>
                 <td>25.01.23</td>
                 <td><a class="fresh" href="songs/HOFAH.mp3">HOFAH</a></td>
             </tr>
-            <!-- More rows will be dynamically added by the script -->
         </tbody>
     </table>
 
+    <div id="hamster"></div>
+
+    <script>
+        const hamster = document.getElementById('hamster');
+        let x = Math.random() * window.innerWidth;
+        let y = Math.random() * window.innerHeight;
+        let dx = (Math.random() - 0.5) * 10; // Random speed
+        let dy = (Math.random() - 0.5) * 10;
+
+        function moveHamster() {
+            x += dx;
+            y += dy;
+
+            // Bounce off the edges
+            if (x <= 0 || x + hamster.offsetWidth >= window.innerWidth) {
+                dx = -dx;
+            }
+            if (y <= 0 || y + hamster.offsetHeight >= window.innerHeight) {
+                dy = -dy;
+            }
+
+            hamster.style.left = `${x}px`;
+            hamster.style.top = `${y}px`;
+
+            requestAnimationFrame(moveHamster);
+        }
+
+        // Start the animation
+        moveHamster();
+    </script>
 </body>
 </html>
+
