@@ -95,11 +95,14 @@
 
     <script>
         const hamster = document.getElementById('hamster');
+        const audio = document.querySelector('audio');
         let x = Math.random() * window.innerWidth;
         let y = Math.random() * window.innerHeight;
         let dx = (Math.random() - 0.5) * 10;
         let dy = (Math.random() - 0.5) * 10;
         const size = 50;
+        const defaultBgColor = '#f1e6ff';
+        let colorInterval;
 
         function moveHamster() {
             x += dx;
@@ -132,6 +135,26 @@
 
         hamster.style.width = `${size}px`;
         hamster.style.height = `${size}px`;
+
+        // Function to start cycling background colors
+        function startBackgroundCycle() {
+            let hue = 0;
+            colorInterval = setInterval(() => {
+                document.body.style.backgroundColor = `hsl(${hue}, 80%, 70%)`;
+                hue = (hue + 3) % 360;
+            }, 35); // Change color every 50ms
+        }
+
+        // Function to stop cycling background colors
+        function stopBackgroundCycle() {
+            clearInterval(colorInterval);
+            document.body.style.backgroundColor = defaultBgColor;
+        }
+
+        // Event listeners for the audio element
+        audio.addEventListener('play', startBackgroundCycle);
+        audio.addEventListener('pause', stopBackgroundCycle);
+        audio.addEventListener('ended', stopBackgroundCycle);
 
         // Start the animation
         moveHamster();
