@@ -19,6 +19,27 @@
             text-align: center;
             overflow: hidden;
         }
+        nav {
+            background-color: #6c4fa0;
+            color: white;
+            width: 100%;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            z-index: 1000;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
         table {
             border-collapse: collapse;
             width: 80%;
@@ -26,7 +47,7 @@
             background-color: white;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-            margin-top: 20px;
+            margin-top: 100px; /* Adjust for nav bar */
         }
         th, td {
             padding: 15px;
@@ -69,6 +90,8 @@
 </head>
 <body>
 
+    <nav id="navbar"></nav>
+
     <h1>Song List</h1>
 
     <table>
@@ -94,6 +117,18 @@
     <div id="hamster"></div>
 
     <script>
+        const pages = ['about', 'contact', 'gallery']; // Manually specify files in the "pages" folder
+
+        // Populate navigation bar with links
+        const navbar = document.getElementById('navbar');
+        pages.forEach(page => {
+            const link = document.createElement('a');
+            link.href = `pages/${page}.html`;
+            link.textContent = page.charAt(0).toUpperCase() + page.slice(1);
+            navbar.appendChild(link);
+        });
+
+        // Hamster animation logic
         const hamster = document.getElementById('hamster');
         const audio = document.querySelector('audio');
         let x = Math.random() * window.innerWidth;
@@ -108,11 +143,13 @@
             x += dx;
             y += dy;
 
-            // Bounce off the edges
+            const navBarHeight = document.querySelector('nav').offsetHeight;
+
+            // Bounce off the edges and nav bar
             if (x <= 0 || x + size >= window.innerWidth) {
                 dx = -dx;
             }
-            if (y <= 0 || y + size >= window.innerHeight) {
+            if (y <= navBarHeight || y + size >= window.innerHeight) {
                 dy = -dy;
             }
 
@@ -142,7 +179,7 @@
             colorInterval = setInterval(() => {
                 document.body.style.backgroundColor = `hsl(${hue}, 80%, 70%)`;
                 hue = (hue + 3) % 360;
-            }, 35); // Change color every 50ms
+            }, 35);
         }
 
         // Function to stop cycling background colors
