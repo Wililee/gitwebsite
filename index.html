@@ -55,11 +55,10 @@
         }
         #hamster {
             position: absolute;
-            width: 50px;
-            height: 50px;
-            background-image: url('https://placekitten.com/50/50'); /* Placeholder for hamster image */
+            background-image: url('https://i.natgeofe.com/k/2fedc730-e8a5-4d86-896b-a32317dafc0a/hamsters-golden-cheeks_3x4.jpg'); /* Placeholder for hamster image */
             background-size: cover;
             background-position: center;
+            border-radius: 50%;
         }
     </style>
 </head>
@@ -90,17 +89,28 @@
         let y = Math.random() * window.innerHeight;
         let dx = (Math.random() - 0.5) * 10; // Random speed
         let dy = (Math.random() - 0.5) * 10;
+        let size = 50; // Initial size
+
+        function randomizeSizeAndSpeed() {
+            size = Math.random() * 50 + 30; // Size between 30px and 80px
+            dx = (Math.random() - 0.5) * 20; // Speed between -10 and 10
+            dy = (Math.random() - 0.5) * 20;
+            hamster.style.width = `${size}px`;
+            hamster.style.height = `${size}px`;
+        }
 
         function moveHamster() {
             x += dx;
             y += dy;
 
             // Bounce off the edges
-            if (x <= 0 || x + hamster.offsetWidth >= window.innerWidth) {
+            if (x <= 0 || x + size >= window.innerWidth) {
                 dx = -dx;
+                randomizeSizeAndSpeed();
             }
-            if (y <= 0 || y + hamster.offsetHeight >= window.innerHeight) {
+            if (y <= 0 || y + size >= window.innerHeight) {
                 dy = -dy;
+                randomizeSizeAndSpeed();
             }
 
             hamster.style.left = `${x}px`;
@@ -109,9 +119,12 @@
             requestAnimationFrame(moveHamster);
         }
 
+        // Initialize hamster size
+        hamster.style.width = `${size}px`;
+        hamster.style.height = `${size}px`;
+
         // Start the animation
         moveHamster();
     </script>
 </body>
 </html>
-
